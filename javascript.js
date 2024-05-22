@@ -6,65 +6,77 @@ let rock = 0;
 let paper = 0; 
 
 // Prompt user for with the message "Do you choose Rock, paper, or scissors?"
-function getUserChoice() {
-    let answer = prompt("Do you choose rock, paper or scissors.");
-    return answer.toLowerCase();
-}
-//loop to ensure that user makes a correct choice.
-let keepGoing = true;
-while(keepGoing) {
-    let userChoice = getUserChoice();
-    // based on the user choice set the values to the rock, paper, and scissors to either 0,1, or 2.
+
+
+let userChoice = "";
+
+const spn = document.querySelector('span');
+spn.addEventListener('click',(event) => {
+    let target = event.target;
+    switch(target.id){
+        case 'rock':
+            userChoice ='rock';
+            console.log(userChoice);
+            playRound();
+            break;
+        case 'paper':
+            userChoice = 'paper';
+            console.log(userChoice);
+            playRound();
+            break;
+        case 'scissors':
+            userChoice = 'scissors';
+            console.log(userChoice);
+            playRound();
+            break;
+    }
+});
+
+
+function playRound(){
     if (userChoice === 'rock') {
         rock = 1;
         scissors = 0;
         paper = 2;
-        keepGoing = false;
     }
     else if (userChoice === 'paper') {
         paper = 1;
         rock = 0;
         scissors = 2;
-        keepGoing = false;
     }
     else if (userChoice === 'scissors') {
         scissors = 1;
         paper = 0;
         rock = 2;
-        keepGoing = false;
+    }
+
+    // getComputerChoice
+    let num = Math.random();
+    let compChoice = null;
+    let compChoiceStr = null;
+
+    if (num < .33) {
+        compChoice = rock;
+        compChoiceStr = 'Rock';
+    }
+    else if (num >= .33 && num < .66) {
+        compChoice = paper
+        compChoiceStr = 'Paper';
     }
     else {
-        alert('Please choose either "Rock", "Paper", or "Scissors"');
+        compChoice = scissors
+        compChoiceStr = 'Scissors';
     }
-}
 
-// create computer choice
-
-let num = Math.random();
-let compChoice = null;
-let compChoiceStr = null;
-
-if (num < .33) {
-    compChoice = rock;
-    compChoiceStr = 'Rock';
-}
-else if (num >= .33 && num < .66) {
-    compChoice = paper
-    compChoiceStr = 'Paper';
-}
-else {
-    compChoice = scissors
-    compChoiceStr = 'Scissors';
-}
-
-// Compare the computer choice to 1
-// alert the user who won
-if (compChoice < 1) {
-    alert(`The computer chose ${compChoiceStr}. You won!`)
-}
-else if (compChoice > 1) {
-    alert(`The computer chose ${compChoiceStr}. You lose!`)
-}
-else {
-    alert (`The computer also chose ${compChoiceStr}. Its a tie!`)
+    // Compare the computer choice to 1
+    // alert the user who won
+    if (compChoice < 1) {
+        alert(`The computer chose ${compChoiceStr}. You won!`)
+    }
+    else if (compChoice > 1) {
+        alert(`The computer chose ${compChoiceStr}. You lose!`)
+    }
+    else {
+        alert (`The computer also chose ${compChoiceStr}. Its a tie!`)
+    }
 }
